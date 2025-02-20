@@ -1,0 +1,19 @@
+instructions:
+  - time: 0
+    movement: "Start"
+  - time: 2
+    movement: "Walking"
+  - time: 10
+    movement: "Walking Upstairs"
+  - time: 18
+    movement: "Walking Downstairs"
+  - time: 26
+    movement: "Writing '1'"
+  - time: 30
+    movement: "Writing '2'"
+  - time: 34
+    movement: "Writing '3'"
+metadata:
+  bpm: 120
+  duration: 40
+  audio_sync: true
