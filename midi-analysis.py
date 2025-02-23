@@ -1,7 +1,7 @@
 import pretty_midi
 
 # Load the MIDI file
-midi_path = "midi\Climb-Ev'ry-Mountain-(From-'The-Sound-Of-Music').mid"  # Adjust file path if needed
+midi_path = "midi\Do-Re-Mi-(From-'The-Sound-Of-Music').mid"  # Adjust file path if needed
 midi = pretty_midi.PrettyMIDI(midi_path)
 
 # Extract tempo and structure

@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Load the extracted audio file
-audio_file = "output_audio.wav"  # Make sure the file exists
+audio_file = "midi\Climb-Ev'ry-Mountain-(From-'The-Sound-Of-Music').mid"  # Make sure the file exists
 y, sr = librosa.load(audio_file, sr=44100)
 
 # Compute onset envelope (detects beat-like events)
