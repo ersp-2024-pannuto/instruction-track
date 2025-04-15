@@ -1,6 +1,6 @@
-import pretty_midi
-import mido
 import os
+import pretty_midi
+from midi2audio import FluidSynth
 from pydub import AudioSegment
 
 # Define paths
@@ -12,11 +12,11 @@ output_mp3 = "final_instructions.mp3"
 # Ensure TTS files exist
 tts_files = {
     "walk": os.path.join(tts_folder, "walk.mp3"),
-    "turn back": os.path.join(tts_folder, "turn back.mp3"),
+    "turn_back": os.path.join(tts_folder, "turn_back.mp3"),
     "stop": os.path.join(tts_folder, "stop.mp3")
 }
 
-# Generate countdown TTS (8 to 1)
+# Generate countdown TTS (8 to 1), if not already present
 countdown_files = []
 for i in range(8, 0, -1):
     tts_path = os.path.join(tts_folder, f"count_{i}.mp3")
@@ -26,10 +26,9 @@ for i in range(8, 0, -1):
         tts.save(tts_path)
     countdown_files.append(AudioSegment.from_mp3(tts_path))
 
-# Convert MIDI to WAV using FluidSynth
+# Convert MIDI to WAV
 def midi_to_wav(midi_file, output_wav, soundfont):
     """ Converts MIDI to WAV using FluidSynth. """
-    from midi2audio import FluidSynth
     fs = FluidSynth(soundfont)
     fs.midi_to_audio(midi_file, output_wav)
 
@@ -48,7 +47,7 @@ def overlay_tts(mp3_file, tts_files, countdown_files, output_file):
     # Define measure points where TTS cues should play
     cue_timing = {
         "walk": [8],  # Just before first music beat
-        "turn back": [48],  # Example "turn back" point
+        "turn_back": [48],  # Example "turn back" point
         "stop": [47]  # Ensure "stop" plays right before "turn back"
     }
 
