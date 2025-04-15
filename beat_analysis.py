@@ -5,15 +5,18 @@ import librosa
 import matplotlib.pyplot as plt
 
 # Load the extracted audio file
-MIDI_FILE = "midi"  # Make sure the file exists
+MIDI_FILE = "instruction_synth/midi"
 def analyze_beat(file_name):
     try:
-        file_path = os.path.join(MIDI_FILE, f"{file_name}")
+        file_path = os.path.join(MIDI_FILE, f"{file_name}.mid")
         y, sr = librosa.load(file_path, sr=44100)
     except Exception as e:
-        print(f"Error loading file {file_name}: {e}")  
-    onset_env = librosa.onset.onset_strength(y=y, sr=sr) # Compute onset envelope (detects beat-like events)
-    tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr, onset_envelope=onset_env) # Detect tempo (BPM)
+        print(f"Error loading file {file_name}: {e}")
+        return  # Exit the function if the file cannot be loaded
+
+    # Compute onset envelope (detects beat-like events)
+    onset_env = librosa.onset.onset_strength(y=y, sr=sr)
+    tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr, onset_envelope=onset_env)  # Detect tempo (BPM)
     beat_times = librosa.frames_to_time(beat_frames, sr=sr)
 
     # Plot detected beats
@@ -31,6 +34,5 @@ def analyze_beat(file_name):
 
 if __name__ == "__main__":
     # Example usage
-    analyze_beat("Climb-Ev'ry-Mountain-(From-'The-Sound-Of-Music').mid")
+    analyze_beat("Yankee_doodle_Saloon_style")
 
-    
